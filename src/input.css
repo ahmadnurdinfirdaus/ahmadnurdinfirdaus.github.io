@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: Arbutus Slab;
+    }
+}
+
+.navbar-fixed {
+    @apply fixed z-[9999] bg-white bg-opacity-60 dark:bg-dark dark:bg-opacity-50;
+    backdrop-filter: blur(5px);
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2)
+}
+
+.humberger-line {
+@apply w-[30px] h-[2px] my-2 block bg-dark dark:bg-white;
+}
+
+.humberger-active > span:nth-child(1) {
+    @apply rotate-45;
+}
+
+.humberger-active > span:nth-child(2) {
+    @apply scale-0;
+}
+
+.humberger-active > span:nth-child(3) {
+    @apply -rotate-45;
+}
+
+.img-portfolio {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out; }
+    .img-portfolio:hover{
+      -webkit-filter: grayscale(0);
+      filter: grayscale(0); }
+
+.garis {
+    border-top: 1.5px solid #0d9488;
+	border-bottom: 1.5px solid #0d9488;
+}
+
+#dark-toggle:checked ~ label div.toggle-circle {
+    @apply translate-x-3;
+}
