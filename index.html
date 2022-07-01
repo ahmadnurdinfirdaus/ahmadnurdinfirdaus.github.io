@@ -214,12 +214,8 @@
                         <textarea type="text" id="pesan" class="form-control w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary lg:text-base focus:shadow-lg h-30" name="pesan" required></textarea>
                     </div>
                     <div class="w-full px-4 mb-8">
-                        <button type="submit" id="submit" class="text-base text-white bg-primary w-full rounded-full py-3 px-8 hover:shadow-lg hover:bg-slate-900 lg:text-lg transition duration-200 ease-in-out">Kirim</button>
-                        <span class="hidden">
-                            <button type="button" class="flex justify-center text-base text-white bg-primary w-full rounded-full py-3 px-8 hover:shadow-lg hover:bg-slate-900 lg:text-lg" disabled>
-                                <svg role="img" xmlns="http://www.w3.org/2000/svg" class="fill-current text white animate-spin h-5 w-5 mr-3 self-center" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M304 48C304 74.51 282.5 96 256 96C229.5 96 208 74.51 208 48C208 21.49 229.5 0 256 0C282.5 0 304 21.49 304 48zM304 464C304 490.5 282.5 512 256 512C229.5 512 208 490.5 208 464C208 437.5 229.5 416 256 416C282.5 416 304 437.5 304 464zM0 256C0 229.5 21.49 208 48 208C74.51 208 96 229.5 96 256C96 282.5 74.51 304 48 304C21.49 304 0 282.5 0 256zM512 256C512 282.5 490.5 304 464 304C437.5 304 416 282.5 416 256C416 229.5 437.5 208 464 208C490.5 208 512 229.5 512 256zM74.98 437C56.23 418.3 56.23 387.9 74.98 369.1C93.73 350.4 124.1 350.4 142.9 369.1C161.6 387.9 161.6 418.3 142.9 437C124.1 455.8 93.73 455.8 74.98 437V437zM142.9 142.9C124.1 161.6 93.73 161.6 74.98 142.9C56.24 124.1 56.24 93.73 74.98 74.98C93.73 56.23 124.1 56.23 142.9 74.98C161.6 93.73 161.6 124.1 142.9 142.9zM369.1 369.1C387.9 350.4 418.3 350.4 437 369.1C455.8 387.9 455.8 418.3 437 437C418.3 455.8 387.9 455.8 369.1 437C350.4 418.3 350.4 387.9 369.1 369.1V369.1z"/></svg>Memproses ...
-                              </button>
-                        </span>
+                        <button type="submit" id="submit" class="text-base text-white bg-primary w-full rounded-full py-3 px-8 hover:shadow-lg hover:bg-slate-900 dark:hover:bg-slate-500 lg:text-lg transition duration-200 ease-in-out btn-kirim">Kirim</button>
+                        <button type="submit" id="submit" class="animate-pulse text-base text-white bg-slate-500 w-full rounded-full py-3 px-8 lg:text-lg btn-proses hidden" disabled>Memproses . . .</button>
                     </div>
                 </div>
             </form>
@@ -297,12 +293,21 @@
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbx5-CgvhkqIAXeMOe-Lg_N6IJgAd7ikJZ8x-YQpOe11FStKXc5mC5QeAPF9iW5rn75zyQ/exec';
-        const form = document.forms['portfolio-contct-form']
+        const form = document.forms['portfolio-contct-form'];
+        const btnKirim = document.querySelector('.btn-kirim');
+        const btnProses = document.querySelector('.btn-proses');
 
         form.addEventListener('submit', e => {
-            e.preventDefault()
+            e.preventDefault();
+            //ketika tombol submit diklik
+            //tampilkan tombol proses, hilangkan tombol kirim
+            btnProses.classList.toggle('hidden');
+            btnKirim.classList.toggle('hidden');
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => {
+                //tampilkan tombol kirim, hilangkan tombol proses
+                btnProses.classList.toggle('hidden');
+                btnKirim.classList.toggle('hidden');
                 //alert
                 Swal.fire({
                 title: 'Hi, Terimakasih!',
@@ -314,8 +319,8 @@
                 form.reset();
                 console.log('success!', response);
             })
-            .catch(error => console.log('Error!', error.message))
-        })
+            .catch(error => console.log('Error!', error.message));
+        });
     </script>
 </body>
 </html>
